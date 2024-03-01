@@ -1,8 +1,34 @@
-﻿
+﻿@model List<PortfolioMongoDB.DAL.Entities.ContactInfo>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
 }
-
-<h1>Index</h1>
+<br />
+<br />
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.ContactInfoID</td>
+                <td>@item.Title</td>
+                <td>@item.Value</td>
+                <td><a href="/ContactInfo/DeleteContactInfo/@item.ContactInfoID" class="btn btn-outline-danger">Sil</a></td>
+                <td><a href="/ContactInfo/UpdateContactInfo/@item.ContactInfoID" class="btn btn-outline-success">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/ContactInfo/CreateContactInfo" class="btn btn-outline-primary">İletişim Bilgisi Ekle</a>
+</div>
 

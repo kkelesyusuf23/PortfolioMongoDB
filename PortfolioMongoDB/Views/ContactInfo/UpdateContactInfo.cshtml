@@ -1,0 +1,22 @@
+﻿@model PortfolioMongoDB.DAL.Entities.ContactInfo
+@{
+    ViewData["Title"] = "UpdateContactInfo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>UpdateContactInfo</h1>
+
+<div class="container">
+    <form method="post">
+        <label>ID</label>
+        <input type="text" asp-for="ContactInfoID" class="form-control" readonly/>
+        <br />
+        <label>Başlık</label>
+        <input type="text" asp-for="Title" class="form-control" />
+        <br />
+        <label>Açıklama</label>
+        <input type="text" asp-for="Value" class="form-control" />
+        <br />
+        <button class="btn btn-outline-info">Kaydet</button>
+    </form>
+</div>

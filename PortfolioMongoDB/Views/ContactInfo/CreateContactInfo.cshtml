@@ -1,0 +1,18 @@
+﻿@model PortfolioMongoDB.DAL.Entities.ContactInfo
+@{
+    ViewData["Title"] = "CreateContactInfo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>CreateContactInfo</h1>
+<div class="container">
+    <form method="post">
+        <label>Başlık</label>
+        <input type="text" asp-for="Title" class="form-control"/>
+        <br />
+        <label>Açıklama</label>
+        <input type="text" asp-for="Value" class="form-control" />
+        <br />
+        <button class="btn btn-outline-info">Kaydet</button>
+    </form>
+</div>
