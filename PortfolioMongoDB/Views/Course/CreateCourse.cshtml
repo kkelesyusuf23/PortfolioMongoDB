@@ -1,0 +1,24 @@
+﻿@model PortfolioMongoDB.DAL.Entities.Courses
+@{
+    ViewData["Title"] = "CreateCourse";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br /><br />
+<div class="container">
+    <form method="post">
+        <label>Adı Soyadı</label>
+        <input type="text" class="form-control" asp-for="NameSurname" />
+        <br />
+        <label>Başlık</label>
+        <input type="text" class="form-control" asp-for="Title" />
+        <br />
+        <label>Resim URL</label>
+        <input type="text" class="form-control" asp-for="ImageURL" />
+        <br />
+        <label>Link</label>
+        <input type="text" class="form-control" asp-for="Link" />
+        <br />
+        <button class="btn btn-outline-info">Kaydet</button>
+    </form>
+</div>

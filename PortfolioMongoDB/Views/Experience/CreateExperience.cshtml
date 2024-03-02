@@ -1,0 +1,61 @@
+﻿@model PortfolioMongoDB.DAL.Entities.Experience
+@{
+    ViewData["Title"] = "CreateExperience";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<br />
+<div class="container">
+    <form method="post" id="experienceForm">
+        <label>Bölüm</label>
+        <input type="text" class="form-control" asp-for="Divition" />
+        <br />
+        <label>Başlangıç Tarihi</label>
+        <input type="date" class="form-control" asp-for="FirstDate" id="startDateInput" />
+        <br />
+        <label>Bitiş Tarihi</label>
+        <input type="date" class="form-control" asp-for="LastDate" id="endDateInput" />
+        <br />
+        <label>Şirket</label>
+        <input type="text" class="form-control" asp-for="CompanyName" />
+        <br />
+        <button type="submit" class="btn btn-outline-info">Kaydet</button>
+    </form>
+</div>
+
+<script>
+    // Form gönderildiğinde başlangıç ve bitiş tarihlerini kontrol et
+    document.getElementById('experienceForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Sayfa yenilemeyi engelle
+
+        // Form verilerini hazırla
+        const formData = new FormData(this);
+
+        // Veriyi gönder
+        fetch('/Experience/CreateExperience/', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    swal({
+                        title: 'Başarılı!',
+                        text: 'Çalışma bilgisi başarıyla kaydedildi.',
+                        icon: 'success',
+                        button: 'Tamam'
+                    }).then(() => {
+                        // Başka bir sayfaya yönlendirme
+                        window.location.href = '/Experience/Index'; // Index sayfasına yönlendir
+                    });
+                } else {
+                    swal('Hata!', 'Çalışma bilgisi kaydedilemedi.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+            });
+    });
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

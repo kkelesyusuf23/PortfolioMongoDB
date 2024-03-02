@@ -1,0 +1,59 @@
+﻿@model PortfolioMongoDB.DAL.Entities.Education
+@{
+    ViewData["Title"] = "UpdateEducation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<br />
+<br />
+<div class="container">
+    <form method="post" id="educationForm">
+        <input type="hidden" asp-for="EducationID" /> 
+        <label>Bölüm</label>
+        <input type="text" class="form-control" asp-for="Divition" />
+        <br />
+        <label>Başlangıç Tarihi</label>
+        <input type="date" class="form-control" asp-for="FirstDate" id="startDateInput" />
+        <br />
+        <label>Bitiş Tarihi</label>
+        <input type="date" class="form-control" asp-for="LastDate" id="endDateInput" />
+        <br />
+        <label>Kurum</label>
+        <input type="text" class="form-control" asp-for="OrganisationName" />
+        <br />
+        <button type="submit" class="btn btn-outline-info">Güncelle</button> 
+    </form>
+</div>
+
+<script>
+    document.getElementById('educationForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch('/Education/UpdateEducation', { 
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    swal({
+                        title: 'Başarılı!',
+                        text: 'Eğitim bilgisi başarıyla güncellendi.',
+                        icon: 'success',
+                        button: 'Tamam'
+                    }).then(() => {
+                        window.location.href = '/Education/Index';
+                    });
+                } else {
+                    swal('Hata!', 'Eğitim bilgisi güncellenemedi.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+            });
+    });
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

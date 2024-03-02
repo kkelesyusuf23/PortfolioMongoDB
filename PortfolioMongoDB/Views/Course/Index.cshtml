@@ -1,0 +1,38 @@
+﻿@model List<PortfolioMongoDB.DAL.Entities.Courses>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<br /><br />
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Adı Soyadı</th>
+            <th>Başlık</th>
+            <th>Resim</th>
+            <th>Link</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.CourseID</td>
+                <td>@item.NameSurname</td>
+                <td>@item.Title</td>
+                <td><img src="@item.ImageURL" style="width:60px;height:60px; border-radius:50%"/></td>
+                <td><a class="btn btn-lg-square btn-outline-dark" href="@item.Link" target="_blank"><i class="fa fa-link"></i></a></td>
+                <td><a href="/Course/DeleteCourse/@item.CourseID" class="btn btn-outline-danger">Sil</a></td>
+                <td><a href="/Course/UpdateCourse/@item.CourseID" class="btn btn-outline-success">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Course/CreateCourse" class="btn btn-outline-primary">Kurs Ekle</a>
+</div>
+

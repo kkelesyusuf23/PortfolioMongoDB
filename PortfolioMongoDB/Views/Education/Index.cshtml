@@ -1,0 +1,37 @@
+﻿@model List<PortfolioMongoDB.DAL.Entities.Education>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<br /><br />
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Bölüm</th>
+            <th>Tarih Aralığı</th>
+            <th>Kurum</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.EducationID</td>
+                <td>@item.Divition</td>
+                <td>@item.FirstDate.Year</td>
+                <td>@item.LastDate.Year</td>
+                <td>@item.OrganisationName</td>
+                <td><a href="/Education/DeleteEducation/@item.EducationID" class="btn btn-outline-danger">Sil</a></td>
+                <td><a href="/Education/UpdateEducation/@item.EducationID" class="btn btn-outline-success">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Education/CreateEducation" class="btn btn-outline-info">Eğitim Ekle</a>
+</div>
+

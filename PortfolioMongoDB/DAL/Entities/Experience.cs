@@ -9,7 +9,8 @@ namespace PortfolioMongoDB.DAL.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string ExperienceID { get; set; }
         public string Divition { get; set; }
-        public DateTime DateRange { get; set; }
+        public DateTime FirstDate { get; set; }
+        public DateTime LastDate { get; set; }
         public string CompanyName { get; set; }
     }
 }
