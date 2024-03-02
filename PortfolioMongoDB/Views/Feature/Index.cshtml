@@ -1,0 +1,41 @@
+﻿@model List<PortfolioMongoDB.DAL.Entities.Feature>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Başlık</th>
+            <th>Ad Soyad</th>
+            <th>Meslek</th>
+            <th>CV Link</th>
+            <th>Video Link</th>
+            <th>ImageURL</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.FeatureID</td>
+                <td>@item.Title</td>
+                <td>@item.Name @item.Surname</td>
+                <td>@item.Job</td>
+                <td><a class="btn btn-lg-square btn-outline-dark" href="@item.CVLink" target="_blank"><i class="fa fa-link"></i></a></td>
+                <td><a class="btn btn-lg-square btn-outline-danger" href="@item.VideoLink" target="_blank"><i class="fa fa-play"></i></a></td>
+                <td><img src="@item.ImageURL" style="width:60px;height:60px; border-radius:50%" /></td>
+                <td><a href="/Feature/DeleteFeature/@item.FeatureID" class="btn btn-outline-danger">Sil</a></td>
+                <td><a href="/Feature/UpdateFeature/@item.FeatureID" class="btn btn-outline-success">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Feature/CreateFeature" class="btn btn-outline-primary">Profil Alanı Ekle</a>
+</div>
+

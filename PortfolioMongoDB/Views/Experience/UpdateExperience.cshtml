@@ -1,0 +1,59 @@
+﻿@model PortfolioMongoDB.DAL.Entities.Experience
+@{
+    ViewData["Title"] = "UpdateExperience";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<br />
+<div class="container">
+    <form method="post" id="experienceForm">
+        <label>ID</label>
+        <input type="text" class="form-control" asp-for="ExperienceID" readonly />
+        <label>Bölüm</label>
+        <input type="text" class="form-control" asp-for="Divition" />
+        <br />
+        <label>Başlangıç Tarihi</label>
+        <input type="date" class="form-control" asp-for="FirstDate" id="startDateInput" />
+        <br />
+        <label>Bitiş Tarihi</label>
+        <input type="date" class="form-control" asp-for="LastDate" id="endDateInput" />
+        <br />
+        <label>Şirket</label>
+        <input type="text" class="form-control" asp-for="CompanyName" />
+        <br />
+        <button type="submit" class="btn btn-outline-info">Güncelle</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('experienceForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch('/Experience/UpdateExperience', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    swal({
+                        title: 'Başarılı!',
+                        text: 'Çalışma bilgisi başarıyla güncellendi.',
+                        icon: 'success',
+                        button: 'Tamam'
+                    }).then(() => {
+                        window.location.href = '/Experience/Index';
+                    });
+                } else {
+                    swal('Hata!', 'Çalışma bilgisi güncellenemedi.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+            });
+    });
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
